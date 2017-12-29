@@ -12,10 +12,17 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
+// Registration
+Route::get('/register', function () {
+    return view('auth.register');
+});
 
+Route::post('/register', array('as' => 'register.post','uses' => 'Auth\RegisterController@store'));
+
+// Admin panel
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
