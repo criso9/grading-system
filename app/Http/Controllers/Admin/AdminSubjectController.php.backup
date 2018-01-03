@@ -1,0 +1,89 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Requests;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use App\Subject;
+use App\Teacher;
+use App\Student;
+
+class AdminSubjectController extends Controller
+{
+    public function index()
+	{
+		$subjId = Teacher::select('subject_id')->where('user_id', '=', Auth::user()->id);
+		$subjects = Subject::whereIn('id', $subjId)->get();
+		
+		return view('admin.subjects.index', compact('subjects'));
+	}
+
+	public function show($id)
+	{
+		//$subject = Student::select('user_id')->where('subject_id', '=', $id)->get();
+		$students = Student::where('subject_id', '=', $id)->with(['user', 'subject'])->get();
+		
+		return view('admin.subjects.show', compact('students'));
+	}
+
+	public function editGrade($subjId, $userId)
+	{
+		$student = Student::where('user_id', '=', $userId)->where('subject_id', '=', $subjId)->with(['user', 'subject'])->first();
+		$subject = Subject::where('id', '=', $subjId)->with('type')->first();
+		return view('admin.subjects.grade', compact('student', 'subject'));
+	}
+
+	public function updateGrade(Request $request, $subjId, $studId)
+	{
+
+		$student = Student::findOrFail($studId);
+		$validator = Validator::make($request = Input::all(), Subject::$rules);
+		$subject = Subject::where('id', '=', $subjId)->with('type')->first();
+
+		if ($validator->fails())
+			{
+				return Redirect::back()->withErrors($validator)->withInput();
+			}
+			
+        // $student->quiz = $request->quiz;
+        // $student->unit_test = $request->unit_test;
+        // $student->term_test = $request->term_test;
+        // $student->laboratory = $request->laboratory;
+
+		// Compute for RawGrades
+			
+
+        $student->update($request);
+        return redirect()->route('teacher.subjects.show', ['subject' => $subjId]);
+	}
+
+	public function edit($id)
+	{
+		$subject = Subject::where('id', '=', $id)->with('type')->first();
+		return view('admin.subjects.edit', compact('subject'));
+	}
+
+	public function update(Request $request, $id)
+	{
+		$subject = Subject::findOrFail($id);
+		// $validator = Validator::make($data = Input::all(), Subject::$rules);
+
+		// if ($validator->fails())
+		// 	{
+		// 		return Redirect::back()->withErrors($validator)->withInput();
+		// 	}
+			
+        $subject->quiz = $request->quiz;
+        $subject->unit_test = $request->unit_test;
+        $subject->term_test = $request->term_test;
+        $subject->laboratory = $request->laboratory;
+
+        $subject->update();
+        return redirect()->route('teacher.subjects.index');
+	}
+}
