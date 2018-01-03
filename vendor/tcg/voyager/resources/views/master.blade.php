@@ -15,6 +15,7 @@
 
     <!-- App CSS -->
     <link rel="stylesheet" href="{{ voyager_asset('css/app.css') }}">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" />
 
     @yield('css')
 

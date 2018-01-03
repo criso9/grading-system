@@ -29,13 +29,12 @@
                 <a class="navbar-brand" href="/"><b>Grading System</b></a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a class="smoothScroll" href="/">Home</a></li>
-                    <li><a class="smoothScroll" href="#about">About</a></li>
-                    <li><a class="smoothScroll" href="#contact">Contact</a></li>
-                </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/admin">Login</a></li>
+                    @if(Auth::check())
+                        <li><a href="/admin">{{ Auth::user()->name }}</a></li>
+                    @else
+                        <li><a href="/admin">Login</a></li>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -44,7 +43,7 @@
 
     </header>
 
-    <main class="container">
+    <main class="container container-fluid">
     	@yield('content')
     </main>
 

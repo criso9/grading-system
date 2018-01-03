@@ -4,10 +4,82 @@
     justify-content: center;
 }
 
- .position-ref {
+.position-ref {
     position: relative;
 }
 
- .full-height {
+.full-height {
     height: 100vh;
+}
+
+.students-box {
+	width:100%;
+	padding: 20px;
+}
+
+.students-box-body {
+	padding: 20px;
+	border-top: 0;
+	color: #666;
+}
+
+form li {
+	list-style-type: none;
+	padding-bottom: 15px;
+}
+
+input[type="text"], input[type="email"], input[type="password"], textarea { 
+	border: 1px solid #ccc; border-radius: 3px; width: 50%; font-size: 14px;
+}
+
+input[type="text"], input[type="email"], input[type="password"] { height: 30px; line-height: 30px; padding: 0 2%; }
+
+textarea { width: 96%; padding: 2%; }
+
+label {width: 100%;}
+
+input[type="submit"] { background: #4288CE; color: #fff; height: 40px; line-height: 40px; border: none; border-radius: 3px; padding: 0 20px; -webkit-transition: all 0.1s ease-in-out; -moz-transition: all 0.1s ease-in-out; -o-transition: all 0.1s ease-in-out; transition: all 0.1s ease-in-out; }
+
+input[type="submit"]:hover { background: #333; }
+
+form.edit {
+	display: inline-block;
+	padding: 0;
+	border: none;
+	width: auto;
+}
+
+/*form.edit input[type="submit"] { 
+	margin-left: 10px; 
+	background: #4288CE; 
+	display: inline-block; 
+	height: auto; 
+	padding: 0.2em; 
+	line-height: 1.2em; 
+}*/
+
+form.edit input[type="submit"]:hover, form.delete input[type="submit"]:hover { 
+	background: #999; 
+}
+
+label[name="tQuiz"], label[name="tUnit"], label[name="tTerm"] {
+	font-weight: normal;
+	width: auto;
+}
+
+.grade-field {width: 20% !important;}
+
+input[type="submit"] { background: #4288CE; color: #fff; height: 40px; line-height: 40px; border: none; border-radius: 3px; padding: 0 20px; -webkit-transition: all 0.1s ease-in-out; -moz-transition: all 0.1s ease-in-out; -o-transition: all 0.1s ease-in-out; transition: all 0.1s ease-in-out; }
+
+.tbl-grade input[type="submit"] {
+	height: 18px;
+	line-height: 0px;
+}
+
+.delete input[type="submit"] { background: red; color: #fff; height: 18px; line-height: 0px; border: none; border-radius: 3px; padding: 0 20px; -webkit-transition: all 0.1s ease-in-out; -moz-transition: all 0.1s ease-in-out; -o-transition: all 0.1s ease-in-out; transition: all 0.1s ease-in-out; }
+
+#email, input[name="password"] {width: 100%;}
+
+.register-box-body input {
+	width: 100%;
 }
