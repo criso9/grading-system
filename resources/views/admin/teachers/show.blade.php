@@ -18,10 +18,18 @@
 			@foreach($teachers as $subject)
 				<li>
 					{{ $subject->subject->description }}
+					{{ Form::open(array('route' => array('admin.teachers.destroy', $subject->id), 'method' => 'delete', 'class' => 'delete unenroll-teacher')) }}
+		            {{ Form::submit('Remove') }}
+		            {{ Form::close() }}
 				</li>
 		    @endforeach
 		@elseif ($teachers->count() > 0)
-			<li>{{ $teachers[0]->subject->description }}</li>
+			<li>
+				{{ $teachers[0]->subject->description }}
+				{{ Form::open(array('route' => array('admin.teachers.destroy', $teachers[0]->id), 'method' => 'delete', 'class' => 'delete unenroll-teacher')) }}
+	            {{ Form::submit('Remove') }}
+	            {{ Form::close() }}
+			</li>
 		@endif 
 	</ul>
 <br/>

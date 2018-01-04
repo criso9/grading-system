@@ -31,9 +31,17 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     @if(Auth::check())
-                        <li><a href="/admin">{{ Auth::user()->name }}</a></li>
+                        <li>
+                        @if(Auth::user()->role_id == 1)
+                            <a href="/admin">
+                        @elseif(Auth::user()->role_id == 2)
+                            <a href="/student/grades">
+                        @elseif(Auth::user()->role_id == 3)
+                            <a href="/teacher/subjects">
+                        @endif
+                        {{ Auth::user()->name }}</a></li>
                     @else
-                        <li><a href="/admin">Login</a></li>
+                        <li><a href="/login">Login</a></li>
                     @endif
                 </ul>
             </div>

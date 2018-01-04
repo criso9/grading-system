@@ -1,4 +1,18 @@
-@extends('voyager::master')
+@extends('panel.teacher')
+
+@section('subjects-list')
+    @if ($subjects_handled->count() > 1)
+        @foreach($subjects_handled as $s_handle)
+            <li>
+                {{ link_to_route('teacher.subjects.show', $s_handle->description, array($s_handle->id)) }}
+            </li>
+        @endforeach
+    @elseif ($subjects_handled->count() > 0)
+        <li>
+            {{ link_to_route('teacher.subjects.show', $subjects_handled[0]->description, array($subjects_handled[0]->id)) }}
+        </li>
+    @endif 
+@stop
 
 @section('content')
 <div class="students-box">

@@ -30,9 +30,25 @@ class User extends \TCG\Voyager\Models\User
     ];
 
     public static $rules = [
+        'email' => 'required|email',
+        'password' => 'required',
+    ];
+
+    public static $reg_rules = [
         'name' => 'required',
         'email' => 'required|email',
-        'password' => 'required|confirmed',
+        'password' => 'required|min:8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%]).*$/|confirmed',
+    ];
+
+    public static $v_reg_rules = [
+        'name' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|min:8',
+    ];
+
+    public static $profile_rules = [
+        'name' => 'required',
+        'email' => 'required|email',
     ];
 
     public function student()

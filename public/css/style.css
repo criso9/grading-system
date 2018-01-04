@@ -17,6 +17,15 @@
 	padding: 20px;
 }
 
+.students-box a {
+    color: #5bc0de;
+}
+
+.students-box a, .students-box a:hover, .students-box a:focus {
+    cursor: pointer;
+}
+
+
 .students-box-body {
 	padding: 20px;
 	border-top: 0;
@@ -82,4 +91,111 @@ input[type="submit"] { background: #4288CE; color: #fff; height: 40px; line-heig
 
 .register-box-body input {
 	width: 100%;
+}
+
+.login-box {
+	margin-top: 5%;
+}
+
+.login-box-body input {
+	width: 100%;
+}
+
+/*Profile*/
+.navbar .navbar-nav > li > a {
+    height: 60px;
+    line-height: 60px;
+    padding: 0 10px 0 20px;
+}
+
+.profile .dropdown-toggle img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.caret {
+	transition: .25s;
+	transform: scale(1.001);
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px solid;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+
+.navbar .dropdown.profile .dropdown-menu {
+    width: 250px;
+    padding: 18px;
+    padding-bottom: 18px;
+}
+
+.navbar .dropdown.profile .dropdown-menu li.profile-img {
+    padding: 0;
+    max-height: 300px;
+    overflow: hidden;
+}
+
+.navbar .dropdown.profile .dropdown-menu li.profile-img img.profile-img {
+    height: 60px;
+    width: 60px;
+    float: left;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.navbar .dropdown.profile .dropdown-menu .profile-body {
+    padding-left: 10px;
+}
+
+.navbar .dropdown.profile .dropdown-menu h5, .navbar .dropdown.profile .dropdown-menu h6 {
+    float: left;
+}
+
+.navbar .dropdown.profile .dropdown-menu h5 {
+    float: left;
+    margin-bottom: 5px;
+    margin-top: 12px;
+}
+
+.navbar .dropdown.profile .dropdown-menu h6 {
+    margin-top: 0;
+    font-weight: 200;
+    width: 115px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.dropdown-menu > li {
+    padding: 0 5px;
+    margin: 2px 0;
+}
+
+.navbar-nav .open .dropdown-menu > li > a {
+    line-height: 20px;
+    padding: 5px 15px 5px 25px;
+}
+
+.dropdown-menu > li > a {
+    border-radius: 3px;
+    background: none;
+}
+.dropdown-menu > li > a {
+    display: block;
+    padding: 10px 5px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #777;
+    white-space: nowrap;
+    text-align: left;
+    transition: color .3s ease;
+}
+
+.unenroll-teacher {
+    float: left;
+    margin-right: 20px;
 }

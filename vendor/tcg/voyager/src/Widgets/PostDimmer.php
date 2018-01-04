@@ -5,6 +5,7 @@ namespace TCG\Voyager\Widgets;
 use Arrilot\Widgets\AbstractWidget;
 use Illuminate\Support\Str;
 use TCG\Voyager\Facades\Voyager;
+use App\Subject;
 
 class PostDimmer extends AbstractWidget
 {
@@ -21,16 +22,16 @@ class PostDimmer extends AbstractWidget
      */
     public function run()
     {
-        $count = Voyager::model('Post')->count();
-        $string = trans_choice('voyager.dimmer.post', $count);
+        $count = Subject::get()->count();
+        $string = "Subjects";
 
         return view('voyager::dimmer', array_merge($this->config, [
             'icon'   => 'voyager-news',
             'title'  => "{$count} {$string}",
-            'text'   => __('voyager.dimmer.post_text', ['count' => $count, 'string' => Str::lower($string)]),
+            'text'   => "You have ".$count." subjects in your database. Click on button below to view all subjects.",
             'button' => [
-                'text' => __('voyager.dimmer.post_link_text'),
-                'link' => route('voyager.posts.index'),
+                'text' => "View all subjects",
+                'link' => route('voyager.subjects.index'),
             ],
             'image' => voyager_asset('images/widget-backgrounds/02.jpg'),
         ]));

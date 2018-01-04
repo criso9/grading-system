@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="students-box">
-<h1>Add Subject</h1>
+<h4>Add Subject</h4>
 	@if (count($errors) > 0)
         <div class="alert alert-danger">
             <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -29,4 +29,5 @@
 	  	{{ Form::close() }}
   	</div>
 </div>
+
 @stop

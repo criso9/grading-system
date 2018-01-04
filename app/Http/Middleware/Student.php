@@ -25,6 +25,7 @@ class Student
             }
         }
 
-        return redirect('/admin');
+        return redirect('/student');
     }
+
 }

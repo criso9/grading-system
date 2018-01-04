@@ -77,7 +77,7 @@ class RegisterController extends Controller
     {
         
             //$validator = Validator::make($request = Input::all(), validator());
-            $validator = Validator::make($request = Input::all(), User::$rules);
+            $validator = Validator::make($request = Input::all(), User::$reg_rules);
             
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
@@ -93,7 +93,7 @@ class RegisterController extends Controller
 
             $data->save();
 
-            return redirect('admin');
+            return redirect('/login');
            
     }
 }

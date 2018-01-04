@@ -28,12 +28,13 @@ class AdminTeacherController extends Controller
 		$enrolledSubjects = Teacher::select('subject_id')->where('user_id', '=', $id)->get();
 		$subjectList = Subject::whereNotIn('id', $enrolledSubjects)->get();
 
-		return view('admin.teachers.show', compact('teachers', 'teacher', 'subjectList'));
+		return view('admin.teachers.show', compact('teachers', 'teacher', 'subjectList', 'id'));
 	}
 
 	public function create($id)
 	{
-		$subjects = Teacher::select('subject_id')->where('user_id', '=', $id)->get();
+		// $subjects = Teacher::select('subject_id')->where('user_id', '=', $id)->get();
+		$subjects = Teacher::select('subject_id')->get();
 		return view('admin.teachers.create', compact('subjects', 'id'));
 	}
 
@@ -55,4 +56,15 @@ class AdminTeacherController extends Controller
 
         return Redirect::route('admin.teachers.show', ['teacher' => $request->user_id]); 
 	} 
+
+	public function destroy($id)
+	{
+		$teacher = Teacher::findOrFail($id);
+
+		$teacherId = Teacher::where('id', '=', $id)->first();
+
+		$teacher->delete();
+
+		return Redirect::route('admin.teachers.show', ['teacher' => $teacherId->user_id]); 
+	}
 }

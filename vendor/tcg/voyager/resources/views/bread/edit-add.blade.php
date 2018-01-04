@@ -39,7 +39,18 @@
                                 <div class="alert alert-danger">
                                     <ul>
                                         @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
+                                            @if($error == 'The password format is invalid.')
+                                                <li>Password must contains characters from at least three of the following:
+                                                    <ul>
+                                                        <li>English uppercase characters (A – Z)</li>
+                                                        <li>English lowercase characters (a – z)</li>
+                                                        <li>Base 10 digits (0 – 9)</li>
+                                                        <li>Non-alphanumeric (For example: !, $, #, or %)</li>
+                                                    </ul>
+                                                </li>
+                                            @else
+                                                <li>{{ $error }}</li>
+                                            @endif
                                         @endforeach
                                     </ul>
                                 </div>

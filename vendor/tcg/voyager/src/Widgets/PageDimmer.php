@@ -21,16 +21,16 @@ class PageDimmer extends AbstractWidget
      */
     public function run()
     {
-        $count = Voyager::model('Page')->count();
-        $string = trans_choice('voyager.dimmer.page', $count);
+        $count = Voyager::model('Role')->count();
+        $string = "Roles";
 
         return view('voyager::dimmer', array_merge($this->config, [
             'icon'   => 'voyager-file-text',
             'title'  => "{$count} {$string}",
-            'text'   => __('voyager.dimmer.page_text', ['count' => $count, 'string' => Str::lower($string)]),
+            'text'   => "You have ".$count." roles in your database. Click on button below to view all roles.",
             'button' => [
-                'text' => __('voyager.dimmer.page_link_text'),
-                'link' => route('voyager.pages.index'),
+                'text' => "View all roles",
+                'link' => route('voyager.roles.index'),
             ],
             'image' => voyager_asset('images/widget-backgrounds/03.jpg'),
         ]));

@@ -72,4 +72,15 @@ class AdminStudentController extends Controller
 	// 		$student->update($request);
 	// 		return redirect()->route('admin.students.index')->with('message', 'Item updated successfully.');
 	// }
+
+	public function destroy($id)
+	{
+		$student = Student::findOrFail($id);
+
+		$studentId = Student::where('id', '=', $id)->first();
+
+		$student->delete();
+
+		return Redirect::route('admin.students.show', ['student' => $studentId->user_id]); 
+	}
 }

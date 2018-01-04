@@ -5,6 +5,9 @@ namespace TCG\Voyager\Http\Controllers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 use TCG\Voyager\Database\Schema\SchemaManager;
 use TCG\Voyager\Events\BreadDataAdded;
 use TCG\Voyager\Events\BreadDataDeleted;
@@ -12,6 +15,7 @@ use TCG\Voyager\Events\BreadDataUpdated;
 use TCG\Voyager\Events\BreadImagesDeleted;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
+use App\User;
 
 class VoyagerBreadController extends Controller
 {
@@ -310,11 +314,22 @@ class VoyagerBreadController extends Controller
         // Validate fields with ajax
         $val = $this->validateBread($request->all(), $dataType->addRows);
 
+
         if ($val->fails()) {
             return response()->json(['errors' => $val->messages()]);
         }
 
         if (!$request->ajax()) {
+
+            // if ($dataType->slug == 'users') {
+            //     $validator = Validator::make($request = Input::all(), User::$v_reg_rules);
+
+            //     if ($validator->fails())
+            //     {
+            //         return Redirect::back()->withErrors($validator)->withInput();
+            //     }
+            // }
+
             $data = $this->insertUpdateData($request, $slug, $dataType->addRows, new $dataType->model_name());
 
             event(new BreadDataAdded($dataType, $data));

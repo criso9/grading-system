@@ -26,6 +26,6 @@ class Teacher
             }
         }
 
-        return redirect('/admin');
+        return redirect('/teacher/subjects');
     }
 }
