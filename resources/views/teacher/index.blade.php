@@ -17,7 +17,15 @@
 @section('content')
 
 <div class="students-box">
-    
+        
+    @if (Session::has('message'))
+       <div class="alert alert-info" style="width: 40%;">
+            <ul>
+                <li>{{ Session::get('message') }}</li>
+            </ul>
+        </div>
+    @endif
+
     <p class="login-box-msg">List of Subjects Handled</p>
         
     <ul>
@@ -34,10 +42,6 @@
         @endif 
     </ul>
         
-    
-<!-- <pre>
-    {{ $subjects }}
-</pre> -->
 </div>
 
 @stop

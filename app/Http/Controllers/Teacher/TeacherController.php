@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Session;
 use App\Subject;
 use App\Teacher;
 use App\Student;
@@ -23,6 +24,19 @@ class TeacherController extends Controller
 	public function panel()
 	{
 		return view('panel.teacher');
+	}
+
+	public function email($subjId, $studId)
+	{
+		// $subjId = Teacher::select('subject_id')->where('user_id', '=', Auth::user()->id);
+		// $subjects = Subject::whereIn('id', $subjId)->get();
+
+		$userId = Student::where('id', '=', $studId)->first();
+		$student = User::where('id', '=', $userId->user_id)->first();
+
+		$grades = Student::where('user_id', '=', $userId->user_id)->where('final_grade', '>', '0')->with(['user', 'subject'])->get();
+
+		return view('emails.send', compact('student', 'grades'));
 	}
 
 	public function profile($id)
@@ -75,6 +89,7 @@ class TeacherController extends Controller
         $user->update();
         // $user->update($request);
 
+        Session::flash('message', "Profile Updated");
         return Redirect::route('teacher.profile.show', ['user' => $id]); 
 	}
 
@@ -146,6 +161,7 @@ class TeacherController extends Controller
         $grade->save();
 
 		// Grade::create($request);
+		Session::flash('message', "Grades updated.");
         return Redirect::route('teacher.subjects.show.grade', ['subject' => $subjId, 'student' => $userId]); 
 	} 
 
@@ -179,6 +195,8 @@ class TeacherController extends Controller
 		$student = Student::select('user_id')->where('id', '=', $grades->student_id)->first();	
 
         $grade->update($request);
+
+        Session::flash('message', "Grades updated.");
         return Redirect::route('teacher.subjects.show.grade', ['subject' => $subjId, 'student' => $student->user_id]); 
 	}
 
@@ -191,6 +209,7 @@ class TeacherController extends Controller
 
 		$grade->delete();
 
+		Session::flash('message', "Grades deleted.");
 		return Redirect::route('teacher.subjects.show.grade', ['subject' => $subjId, 'student' => $student->user_id]); 
 	}
 
@@ -245,6 +264,7 @@ class TeacherController extends Controller
 		    //return redirect()->route('teacher.subjects.show.grade', ['subject' => $subjId, 'student' => $studId]);
 	}
 
+		Session::flash('message', "Final grade computed.");
 		return redirect()->route('teacher.subjects.show', ['subject' => $subjId]);
 	}
 
@@ -274,6 +294,7 @@ class TeacherController extends Controller
         $subject->laboratory = $request->laboratory;
 
         $subject->update();
+
         return redirect()->route('teacher.index');
 	}
 }

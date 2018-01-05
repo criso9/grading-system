@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::post('/send/{id}', array('as' => 'email.send', 'uses' => 'EmailController@send'));
+
 // Registration
 Route::get('/register', function () {
     return view('auth.register');
@@ -26,7 +28,7 @@ Route::post('logout', array('as' => 'logout', 'uses' => 'Auth\LoginController@ge
 Route::post('/register', array('as' => 'register.post','uses' => 'Auth\RegisterController@store'));
 
 // Admin panel
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Voyager::routes();
 
     // enroll students to subjects
@@ -64,6 +66,8 @@ Route::group(['prefix' => 'teacher', 'middleware' => 'teacher'], function () {
     Route::delete('subjects/{subject}/{student}', array('as' => 'teacher.subjects.destroy.grade','uses' => 'Teacher\TeacherController@destroyGrade'));
 
     Route::put('subjects/{subject}/{student}/compute', array('as' => 'teacher.subjects.compute','uses' => 'Teacher\TeacherController@compute'));
+
+    Route::get('subjects/{subject}/{student}/email', array('as' => 'teacher.subjects.email','uses' => 'Teacher\TeacherController@email'));
 
 });
 

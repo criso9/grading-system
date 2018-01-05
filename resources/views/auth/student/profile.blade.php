@@ -11,4 +11,12 @@
         <p>{{ Auth::user()->bio }}</p>
         <a href="{{ route('student.profile.edit', Auth::user()->id) }}" class="btn btn-primary">{{ __('voyager.profile.edit') }}</a>
     </div>
+
+    @if (Session::has('message'))
+       <div class="alert alert-info" style="width: 40%;">
+            <ul>
+                <li>{{ Session::get('message') }}</li>
+            </ul>
+        </div>
+    @endif
 @stop

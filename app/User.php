@@ -37,7 +37,7 @@ class User extends \TCG\Voyager\Models\User
     public static $reg_rules = [
         'name' => 'required',
         'email' => 'required|email',
-        'password' => 'required|min:8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%]).*$/|confirmed',
+        'password' => 'required|min:8|confirmed',
     ];
 
     public static $v_reg_rules = [

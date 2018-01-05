@@ -17,7 +17,17 @@
 @section('content')
 
 <div class="students-box">
+
 <h4>Enrolled Students</h4>
+<br/>
+@if (Session::has('message'))
+       <div class="alert alert-info" style="width: 40%;">
+            <ul>
+                <li>{{ Session::get('message') }}</li>
+            </ul>
+        </div>
+    @endif
+    <br/>
 <span><b>Subject: </b></span>{{ $subject->description }}
 <br/><br/>
 
@@ -28,6 +38,7 @@
 		<td>Final Grade</td>
 		<td>Remarks</td>
 		<td>View</td>
+		<td>Action</td>
 	</tr>
 	@if ($students->count() > 1)
 		@foreach($students as $student)
@@ -36,6 +47,11 @@
 		        <td>{{ $student->final_grade }}</td>
 		        <td>{{ $student->remarks }}</td>
 		        <td>{{ link_to_route('teacher.subjects.show.grade', 'View', array($student->subject->id, $student->user->id)) }}</td>
+		        <td>
+		        	{{ Form::open(array('route' => array('email.send', $student->id), 'method' => 'post', 'class' => 'edit')) }}
+				    {{ Form::submit('Send Email') }}
+				    {{ Form::close() }}
+				</td>
 	        </tr>
 	    @endforeach
 	@elseif ($students->count() > 0)
@@ -44,10 +60,15 @@
 	        <td>{{ $students[0]->final_grade }}</td>
 	        <td>{{ $students[0]->remarks }}</td>
 	        <td>{{ link_to_route('teacher.subjects.show.grade', 'View', array($students[0]->subject->id, $students[0]->user->id)) }}</td>
+	        <td>
+	        	{{ Form::open(array('route' => array('email.send', $students[0]->id), 'method' => 'post', 'class' => 'edit')) }}
+			    {{ Form::submit('Send Email') }}
+			    {{ Form::close() }}
+			</td>
         </tr>
     @else
     	<tr align="center">
-    		<td colspan="4">
+    		<td colspan="5">
     			<span style="color: red;">No enrolled Students</span>
     		</td>
     	</tr>

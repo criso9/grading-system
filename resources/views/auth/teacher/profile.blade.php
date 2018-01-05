@@ -24,5 +24,14 @@
         <div class="user-email text-muted">{{ ucwords(Auth::user()->email) }}</div>
         <p>{{ Auth::user()->bio }}</p>
         <a href="{{ route('teacher.profile.edit', Auth::user()->id) }}" class="btn btn-primary">{{ __('voyager.profile.edit') }}</a>
+
+        @if (Session::has('message'))
+           <div class="alert alert-info" style="width: 40%;">
+                <ul>
+                    <li>{{ Session::get('message') }}</li>
+                </ul>
+            </div>
+        @endif
+    
     </div>
 @stop

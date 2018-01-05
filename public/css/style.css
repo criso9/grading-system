@@ -199,3 +199,9 @@ input[type="submit"] { background: #4288CE; color: #fff; height: 40px; line-heig
     float: left;
     margin-right: 20px;
 }
+
+.profile:hover ul.dropdown-menu  {
+    display: block;
+    opacity: 100;
+    visibility: visible;
+}

@@ -32,6 +32,14 @@
         </div>
     @endif
 
+    @if (Session::has('message'))
+       <div class="alert alert-info" style="width: 40%;">
+            <ul>
+                <li>{{ Session::get('message') }}</li>
+            </ul>
+        </div>
+    @endif
+
 {{ link_to_route('teacher.subjects.create.grade', 'Add Grades', array($student->subject->id, $student->user_id)) }}
 
     <div class="students-box-body">
@@ -55,7 +63,7 @@
 
 
 <!-- <pre>
-	{{ $grades }}
+	{{ $student }}
 </pre> -->
 </div>
 @stop
